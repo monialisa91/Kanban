@@ -12,7 +12,7 @@ $(function(){
 	function Column(name) {
 		var self = this;
 		this.id = randomString();
-		this.name = name;
+		this.name = name || 'Column';
 		this.$element = createColumn();
 
 		function createColumn() {
@@ -23,10 +23,11 @@ $(function(){
 			var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
 
 			$columnDelete.click(function() {
-			self.removeColumn();
+				self.removeColumn();
 			});
+
 			$columnAddCard.click(function(event) {
-			self.addCard(new Card(prompt("Enter the name of the card")));
+				self.addCard(new Card(prompt("Enter the name of the card")));
 			});
 
 			$column.append($columnTitle)
@@ -39,18 +40,23 @@ $(function(){
 	}
 
 	Column.prototype = {
-    	addCard: function(card) {
-      		this.$element.children('ul').append(card.$element);
-    	},
-    	removeColumn: function() {
-      		this.$element.remove();
-    	}
-    };
+		addCard: function(card) {
+			this.$element.children('ul').append(card.$element);
+		},
+		removeColumn: function() {
+			this.$element.remove();
+		}
+	};
 
 	function Card(description) {
 		var self = this;
 		this.id = randomString();
-		this.description = description;
+		this.description = description || 'Some task';
+
+		if (description === null) {
+        	return; //break out of the function early
+    	}
+
 		this.$element = createCard(); 
 
 		function createCard() {
@@ -80,8 +86,8 @@ $(function(){
 		addColumn: function(column) {
 			this.$element.append(column.$element);
 			initSortable();
-    	},
-    	$element: $('#board .column-container')
+		},
+		$element: $('#board .column-container')
 	};
 
 	function initSortable() {
@@ -94,9 +100,12 @@ $(function(){
 	$('.create-column')
 		.click(function(){
 			var name = prompt('Enter a column name');
+			if (name === null) {
+				return; 
+			}
 			var column = new Column(name);
-    		board.addColumn(column);
-  		});
+			board.addColumn(column);
+		});
 
 	var todoColumn = new Column('To do');
 	var doingColumn = new Column('Doing');
@@ -111,6 +120,5 @@ $(function(){
 
 	todoColumn.addCard(card1);
 	doingColumn.addCard(card2);
-
 
 });
