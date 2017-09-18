@@ -35,7 +35,7 @@ $(function(){
 			.append($columnAddCard)
 			.append($columnCardList);
 
-		return $column;
+			return $column;
 		}
 	}
 
@@ -54,8 +54,8 @@ $(function(){
 		this.description = description || 'Some task';
 
 		if (description === null) {
-        	return; //break out of the function early
-    	}
+			return; 
+		}
 
 		this.$element = createCard(); 
 
@@ -92,20 +92,19 @@ $(function(){
 
 	function initSortable() {
 		$('.column-card-list').sortable({
-		connectWith: '.column-card-list',
-		placeholder: 'card-placeholder'
-		}).disableSelection();
+			connectWith: '.column-card-list',
+			placeholder: 'card-placeholder'
+			}).disableSelection();
 	}
 
-	$('.create-column')
-		.click(function(){
-			var name = prompt('Enter a column name');
-			if (name === null) {
-				return; 
-			}
-			var column = new Column(name);
-			board.addColumn(column);
-		});
+	$('.create-column').click(function(){
+		var name = prompt('Enter a column name');
+		if (name === null) {
+			return; 
+		}
+		var column = new Column(name);
+		board.addColumn(column);
+	});
 
 	var todoColumn = new Column('To do');
 	var doingColumn = new Column('Doing');
