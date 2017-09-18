@@ -31,9 +31,9 @@ $(function(){
 			});
 
 			$column.append($columnTitle)
-			.append($columnDelete)
-			.append($columnAddCard)
-			.append($columnCardList);
+					.append($columnDelete)
+					.append($columnAddCard)
+					.append($columnCardList);
 
 			return $column;
 		}
@@ -94,7 +94,7 @@ $(function(){
 		$('.column-card-list').sortable({
 			connectWith: '.column-card-list',
 			placeholder: 'card-placeholder'
-			}).disableSelection();
+		}).disableSelection();
 	}
 
 	$('.create-column').click(function(){
