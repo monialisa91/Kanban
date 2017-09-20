@@ -31,9 +31,9 @@ $(function(){
 			});
 
 			$column.append($columnTitle)
-					.append($columnDelete)
-					.append($columnAddCard)
-					.append($columnCardList);
+				   .append($columnDelete)
+				   .append($columnAddCard)
+				   .append($columnCardList);
 
 			return $column;
 		}
